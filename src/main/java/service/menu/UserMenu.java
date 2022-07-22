@@ -1,5 +1,11 @@
 package service.menu;
 
 public class UserMenu {
-22
+    public void login() {
+
+    }
+
+    public void signin(){
+
+    }
 }

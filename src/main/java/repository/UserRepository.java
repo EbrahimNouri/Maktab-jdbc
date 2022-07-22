@@ -61,6 +61,10 @@ public class UserRepository {
 
     }
 
+
+
+
+
     public void updateUser(long id , User user) throws SQLException {
         String sql = "update user_table firstname = ? , lastname = ?, username = ? , pssword = ?  where id = ?";
         PreparedStatement ps = ApplicationConstant.getConnection().prepareStatement(sql);

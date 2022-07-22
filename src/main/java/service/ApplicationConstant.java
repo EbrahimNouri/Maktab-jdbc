@@ -6,6 +6,8 @@ import java.sql.Connection;
 
 public class ApplicationConstant {
 
+    static final String[] USER_MENU = {"login,signing","exit"};
+
     private static Connection connection = new DBhelper().connect();
     private static UserRepository userRepository = new UserRepository();
 
