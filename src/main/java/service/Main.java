@@ -16,15 +16,13 @@ public class Main {
         // List<User> return_user = ApplicationConstant.getUserRepository().findAllUser();
         //  System.out.println(return_user);
 
-        User user = ApplicationConstant.getUserRepository().findUserById(4);
-        System.out.println(user);
-        user.setfName("ali");
-        user.setlName("nouri");
-        ApplicationConstant.getUserRepository().updateUser(4,user);
-
-        }
-
-
-
+//        User user = ApplicationConstant.getUserRepository().findUserById(4);
+//        System.out.println(user);
+//        user.setfName("ali");
+//        user.setlName("nouri");
+//        ApplicationConstant.getUserRepository().updateUser(4,user);
+        ApplicationConstant.getUserMenu().runFirstMenu();
     }
+
+
 }
