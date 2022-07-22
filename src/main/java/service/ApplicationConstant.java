@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class ApplicationConstant {
 
-    public static final String[] USER_MENU = {"login,signing","exit"};
+    public static final String[] USER_MENU = {"login","signing","exit"};
     private static UserMenu userMenu = new UserMenu();
 
     public static UserMenu getUserMenu() {

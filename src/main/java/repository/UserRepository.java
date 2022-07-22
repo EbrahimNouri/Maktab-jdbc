@@ -2,6 +2,7 @@ package repository;
 
 import entity.User;
 import service.ApplicationConstant;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -25,7 +26,6 @@ public class UserRepository {
             foundUser.setPassword(rs.getString(5));
         }
         return foundUser;
-
     }
 
     public User createUser(User user) throws SQLException {
@@ -48,12 +48,13 @@ public class UserRepository {
             return user;
         }
     }
+
     public void deleteUser(long id) throws SQLException {
         String sql = "DELETE FROM user_table id = ?";
         PreparedStatement ps = ApplicationConstant.getConnection().prepareStatement(sql);
-        ps.setLong(1,id);
+        ps.setLong(1, id);
         int check = ps.executeUpdate();
-        if (check == 1){
+        if (check == 1) {
 
             System.out.println("user delete successfully");
         }
@@ -62,19 +63,16 @@ public class UserRepository {
     }
 
 
-
-
-
-    public void updateUser(long id , User user) throws SQLException {
+    public void updateUser(long id, User user) throws SQLException {
         String sql = "update user_table firstname = ? , lastname = ?, username = ? , pssword = ?  where id = ?";
         PreparedStatement ps = ApplicationConstant.getConnection().prepareStatement(sql);
-        ps.setString(1,user.getfName());
-        ps.setString(2,user.getlName());
+        ps.setString(1, user.getfName());
+        ps.setString(2, user.getlName());
         ps.setString(3, user.getUserName());
         ps.setString(4, user.getPassword());
-        ps.setLong(5,id);
+        ps.setLong(5, id);
         int check = ps.executeUpdate();
-        if(check == 1){
+        if (check == 1) {
             System.out.println("DONE");
         }
 
@@ -87,33 +85,50 @@ public class UserRepository {
         PreparedStatement ps = ApplicationConstant.getConnection().prepareStatement(sql);
 
         ResultSet rs = ps.executeQuery();
-       if(rs.next()) {
-           while (rs.next()) {
-               allUser.add(new User(rs.getLong(1),
-                       rs.getString(2),
-                       rs.getString(3),
-                       rs.getString(4),
-                       rs.getString(5)));
-           }
-       }else{
-           System.out.println("user not exists !!!!");
-       }
+        if (rs.next()) {
+            while (rs.next()) {
+                allUser.add(new User(rs.getLong(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5)));
+            }
+        } else {
+            System.out.println("user not exists !!!!");
+        }
         return allUser;
     }
 
     public boolean isUsernameExist(String username) throws SQLException {
 
         PreparedStatement stm = ApplicationConstant.getConnection().prepareStatement("select * from user_table where username = ?");
-        stm.setString(1,username);
+        stm.setString(1, username);
         ResultSet rs = stm.executeQuery();
-        if(rs.next()){
-            System.out.println(username+" already exists");
+        if (rs.next()) {
+            System.out.println(username + " already exists");
             return true;
-        }else{
+        } else {
             System.out.println("username is correct");
             return false;
         }
 
+    }
+
+    public User userByUsername(String username) throws SQLException {
+        User foundUser = new User();
+        String sql = "select * from user_table where username = ?";
+        PreparedStatement stm = ApplicationConstant.getConnection().prepareStatement(sql);
+        stm.setString(1, username);
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()){
+            foundUser.setId(rs.getLong(1));
+            foundUser.setfName(rs.getString(2));
+            foundUser.setlName(rs.getString(3));
+            foundUser.setUserName(rs.getString(4));
+            foundUser.setPassword(rs.getString(5));
+
+        }
+        return foundUser;
     }
 
 
@@ -128,4 +143,6 @@ public class UserRepository {
 
 
     }
+
+
 }
